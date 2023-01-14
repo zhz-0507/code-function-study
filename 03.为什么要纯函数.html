@@ -8,40 +8,13 @@
 </head>
 <body>
   <script>
-    // 纯函数的定义：
-    // 1.相同的输入返回相同的结果
-    // 2.不会造成的额外影响，例如全局上下文，执行栈
+    // 程序和数学的相同性
+    // 无副作用
 
-    // case:1 加法函数
-    function add(a, b) {
-      return a + b
-    }
-
-    // case:2: 姓名处理函数
-    function prcessName(firstName, lastName) {
-      const fullName = `${firstName} + ${lastName}`
-      console.log("fullName" , fullName)
-      return fullName
-    }
-
-    // case: 此时函数不是一个纯函数，console会影响控制台的输出，
-    // prcessName在执行中产生了副作用
-    // 当把console去掉后 --> 纯函数
-
-    // case:3 网络请求函数
-    async function getData(url) {
-      const response = await fetch(url)
-      const { data } = response
-      return data
-    }
-    // 分析：不是纯函数，
-    // 需要网络请求的数据是动态的，相同的输入，服务端未必有相同的输出，可能会返回err
-
-    // 函数纯与不纯的本质？ （显示数据流）
-    // 纯函数：函数除了入参和返回值外，不以其他形式与外界进行数据交换
-
-    // 不纯的本质：-----> 隐式数据流
-    // 对于case1 来说，add函数操作的是全局作用域中的变量
+    // 函数式的三大特征：
+    // 拥抱纯函数, 隔离副作用
+    // 函数式一等公民
+    // 避免对状态的改变
 
 
 
