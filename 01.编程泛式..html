@@ -9,9 +9,89 @@
 <body>
   <script>
     // JS编程三大范式:
-    // 1.命令式
+    // 1.命令式 :
+        // 需要对某个过程非常了解
     // 2.面向对象
     // 3.函数式
+      // 声明式的一种，只关心结果，不关心过程
+      // 相当于黑盒 （想要什么样的输出， 需要什么样的输入）
+
+      // eg:
+      const peopleList = [
+        {
+          name: 'John Lee',
+          age: 24,
+          career: 'engineer'
+        },
+        {
+          name: 'Bob Chen',
+          age: 22,
+          career: 'engineer'
+        },
+        {
+          name: 'Lucy Liu',
+          age: 28,
+          career: 'PM'
+        },
+        {
+          name: 'Jack Zhang',
+          age: 26,
+          career: 'PM'
+        },
+        {
+          name: 'Yan Xiu',
+          age: 30,
+          career: 'engineer'
+        }
+      ]
+
+      // 我们有一个员工信息数据库。现在为了对年龄大于等于 24 岁的员工做生涯指导，
+      // 需要拉出一张满足条件的员工信息清单，要求清单中每一条信息中间用逗号分隔，并按照年龄升序展示。
+      
+      const len = peopleList.length
+      for(let i = 0; i < len; i++) {
+        for(let j = 0; j < len -1; j++) {
+          if(peopleList[j].age > peopleList[j+1].age) {
+            let temp = peopleList[j].age
+            peopleList[j].age = peopleList[j+1].age
+            peopleList[j+1].age = temp
+          }
+        }
+      }
+      let logText = ''
+      for(let i=0; i<len; i++) {
+        const person = peopleList[i]
+        // 【筛选】出年龄符合条件的
+        if( person.age >= 24 ) {
+          // 从数组中【提取】目标信息到 logText
+          const perLogText = `${person.name}'s age is ${person.age}`
+          if(i!==len-1) {
+            logText += `${perLogText},`
+          } else {
+            logText += perLogText
+          }
+        }
+      }
+      // 以上是命令式编程，进行了三步：筛选，排序，信息提取
+
+      // 下面是函数式操作：
+      // 定义筛选逻辑
+      const ageBiggerThan24 = (person) => person.age >= 24
+      // 定义排序逻辑
+      const smallAgeFirst = (a, b) => {
+        return a.age - b.age
+      }
+      // 定义提取逻辑
+      const generateLogText = (person) => {
+        const perLogText = `${person.name}'s age is ${person.age}`
+        return perLogText
+      }
+
+      const res = peopleList.filter(ageBiggerThan24)
+                              .sort(smallAgeFirst)
+                              .map(generateLogText)
+                              .join(',')
+      console.log('----', res)
   </script>
 </body>
 </html>
