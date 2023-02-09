@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/immutable/4.2.2/immutable.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/immutable/4.2.2/immutable.js"></script>
+</head>
+<body>
+  <script>
+  //  拷贝并不是万能的，拷贝会吃CPU，如果状态简单，逻辑轻量的应用来说，
+  // 当数据规模大，数据拷贝行为频繁时，会给性能带来困难
+
+  // ImmutableJS 是实现持久化数据结构的库
+
+  // 思考问题？
+  // 在创建commit的时候，git会对整个项目的所有文件做一个快照。
+    // 快照是什么？
+    // 快照记录的并不是文件内容，而是文件的索引，
+    // 当 commit 发生时， git 会保存当前版本所有文件的索引。
+
+    // 对于那些没有发生变化的文件，git 保存他们原有的索引；对于那些已经发生变化的文件，git 会保存变化后的文件的索引。
+
+    // 快照的本质是的文件的索引进行记录
+    // 在生成快照的过程中，没有发生文件修改的，会继续用之前的索引
+
+    //     Git 快照保存文件索引，而不会保存文件本身。
+
+    // 变化的文件将拥有新的存储空间+新的索引，不变的文件将永远呆在原地。
+
+    // 持久化数据的精髓在于”数据共享“
+    // 确保只有变化的部分被处理，不变的部分继续留在原地
+
+    const dataA = Immutable.Map({
+      do: 'coding',
+      age: 666,
+      from: 'a',
+      to: 'b'
+    })
+
+    const dataB = dataA.set({
+      age: 66.6,
+      sex: '1'
+    })
+
+    console.log("dataA", dataA)
+    console.log("dataB", dataB)
+
+
+  </script>
+</body>
+</html>

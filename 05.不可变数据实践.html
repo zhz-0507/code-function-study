@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // case1： const不可变数据
+    const price = 10
+    // price = 20
+
+    const me = {
+      name: 'zzz',
+      age: 25
+    }
+
+    me.age = 30
+    console.log(me)
+
+
+    // 对于引用类型来说，const并没有用
+
+    // 引用类型不可变数据实践原则：拷贝，而不是修改
+    // 拷贝行为的实践：安全，快速，药到病除
+    const job_001 = { 
+      level: 7,
+      workTime: 2,
+      type: 'engineer',
+      city: 'beijing'
+    }
+
+    // 根据公司当前的高管职位总数是否少于一定的阈值，来决定增加高管职位还是基础职位
+    function isHighPosition() {
+      return true
+    }
+
+    // 将 hr 的需求实现为函数 dynamicCreateJob()
+    function dynamicCreateJob(baseJob) {
+      let newJob = Object.assign({}, baseJob)
+      // 判断当前是否需要增加一个高管职位
+      if(isHighPosition()) {
+        newJob.level = 10
+      }
+      return newJob
+    }
+
+    const dynamicJob  = dynamicCreateJob(job_001)
+    
+
+    // 这样直接在job_001上进行修改，如果用到job_001这块的数据会集体躺枪
+
+    // 可以做一下拷贝不要修改basejob，修改副本，
+    // 这样就把baseJob变为只读数据
+
+
+    console.log("~~111111~~~", job_001)
+    console.log("~~2222222~~", dynamicJob)
+
+    // 对于函数式编程来说：函数外部的数据是只读的，函数内部数据是可修改的
+
+
+
+
+
+
+
+
+
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    const validKeys = ["name", "app", "activeWhen", "customProps"];
+    const config = {
+      name: 'app2',
+      app: 'app111',
+      activesssWhen: '',
+      custom11Props: "",
+    }
+    const keysArr = Object.keys(config)
+    console.log("",keysArr)
+
+    const invalidKeys = Object.keys(config).reduce(
+      (invalidKeys, prop) =>
+        validKeys.indexOf(prop) >= 0 ? invalidKeys : invalidKeys.concat(prop),
+      []
+    );
+    console.log("----",invalidKeys)
+
+  </script>
+</body>
+</html>
