@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // const funs = [fun1, fun2, fun3]
+    // funs.reduce(callback, 0)
+    
+    // function callback(input, fun) {
+    //   return fun(input)
+    // }
+
+    // 实现pipe函数
+    function pipe(...funcs) {
+      function callback(input, func) {
+        return func(input)
+      }  
+
+      return function(param) {
+        return funcs.reduce(callback,param)
+      }
+    }
+    // 验证pipe
+    function add4(num) {
+      return num + 4
+    }  
+
+    function multiply3(num) {
+      return num*3
+    }  
+
+    function divide2(num) {
+      return num/2
+    }
+
+    const computed = pipe(add4,multiply3, divide2)
+    console.log("@@@@@@", computed)
+
+
+
+  </script>
+</body>
+</html>

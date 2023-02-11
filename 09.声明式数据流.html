@@ -8,8 +8,27 @@
 </head>
 <body>
   <script>
+    const arr = [1, 2, 3, 4, 5, 6, 7, 8] 
     
+    const biggerThan2 = sum => sum > 2
+    const multi2 = sum => sum * 2
+    const add = (a,b) => {return a + b}
+    // 完成步骤 1
+    const filteredArr = arr.filter(biggerThan2)    
+    // 完成步骤 2
+    const multipledArr = filteredArr.map(multi2)    
+    // 完成步骤 3
+    const sum = multipledArr.reduce(add, 0)
 
+    console.log("计算出结果", sum)
+
+    // *****这里思考一个问题？ 我们只需要知道计算后的结果，
+    // 现在产生了额外的定义，并且定义的数据，可能会被强行修改
+
+    const newSum = arr.filter(biggerThan2).map(multi2).reduce(add, 0)
+    console.log('----', newSum)
+    // 链式调用，数据流从上到下传递
+    
 
 
 
