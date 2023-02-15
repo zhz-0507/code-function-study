@@ -22,6 +22,7 @@
       }  
 
       return function(param) {
+        console.log("参数", param)
         return funcs.reduce(callback,param)
       }
     }
@@ -39,7 +40,7 @@
     }
 
     const computed = pipe(add4,multiply3, divide2)
-    console.log("@@@@@@", computed)
+    console.log("@@@@@@", computed(10))
 
 
 

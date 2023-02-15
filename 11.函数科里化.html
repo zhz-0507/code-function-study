@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 函数科里化是将一个n元函数转化为n个一元函数的过程
+
+    // 偏函数是将一个n元函数转化为m （m < n） 个一元函数的过程
+    
+    // function wrapFunc(func, fixedValue) {
+    //   function wrappedFunc(input) {
+    //     const newFunc = func(input, fixedValue)
+    //     return newFunc 
+    //   }
+    //   return wrappedFunc
+    // }
+
+    // function multiply(x, y) {
+    //   return x*y
+    // }
+    // const multiply3 = wrapFunc(multiply, 3)
+    // console.log(multiply3(6))
+    
+    // 偏函数和科里化主要是逻辑的复用
+    // 一元函数，一个入参
+    // function multiply(x, y) {
+    //   return x*y
+    // }
+
+    // // 定义一个包装函数，专门用来处理偏函数逻辑
+    // function curry(func) {
+    //   console.log('@@@', func)
+    //   // 逐层拆解传参步骤 - 第一层
+    //   return function(x){
+    //     console.log('第一个参数', x)
+    //     // 逐层拆解传参步骤 - 第二层
+    //     return function(y) {
+    //       console.log('第二个参数', y)
+    //       // 参数传递完毕，执行回调
+    //       return func(x, y)
+    //     }
+    //   }
+    // }
+    // const multiply3 = curry(multiply)(3)
+    // // 输出6
+    // console.log(multiply3(2)) 
+
+    // 实现科里化函数
+    // 将一个函数换为科里化
+    function curry(func, arity = func.length) {
+      console.log("接受到的函数", func)
+      // 定义一个递归式 generateCurried
+      function generateCurried(prevArgs) {
+        console.log("返回一层的参数", prevArgs)
+        // generateCurried 函数必定返回一层嵌套
+        return function curried(nextArg) {
+          // 统计参数
+          const args = [...prevArgs, nextArg]
+          console.log("统计到的参数", args)
+          // 若 “已记忆”+“未记忆”的参数数量 >= 回调函数元数，则认为已经记忆了所有的参数
+          if(args.length >= arity) {
+            // 触碰递归边界
+            return func(...args)
+          }else {
+            return generateCurried(args)
+          }
+        }
+      }
+      // 调用 generateCurried，起始传参为空数组，表示“目前还没有记住任何参数”
+      return generateCurried([])
+    }
+
+    function add(a, b) {
+      console.log("计算出的结果", a, b)
+      return a + b
+    }
+    
+    const curriedAdd = curry(add)
+    const res = curriedAdd(1)(2)
+    console.log("@@@@@res@@@", res)
+  </script>
+</body>
+</html>
