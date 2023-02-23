@@ -7,7 +7,17 @@
   <title>Document</title>
 </head>
 <body>
+  <input type="text">
+  <input type="range">
+  <video src="http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4" controls></video>
+  <textarea></textarea>
   <script>
+    const shadowroot = root.attachShadow({mode: 'open'})
+    const template = `
+      <div>前端南玖</div>
+    `
+    shadowroot.innerHTML = template
+
     // 函数科里化是将一个n元函数转化为n个一元函数的过程
 
     // 偏函数是将一个n元函数转化为m （m < n） 个一元函数的过程

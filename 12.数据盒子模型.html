@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    function add4(num) {
+      return num + 4
+    }  
+
+    function multiply3(num) {
+      return num*3
+    }  
+
+    function divide2(num) {
+      return num/2
+    }
+
+    const isEmpty = x => x === undefined || x === null
+    // Identity Functor
+    const Maybe = x => ({
+      map: (fn) => isEmpty(x) ? Maybe(null) : Maybe(fn(x)), 
+      valueOf: () => x,
+      inspect: () => `Identity {${x}}`
+
+    })
+    
+
+    const newBox = Identity(10).map(add4)  
+    // 输出 14
+    console.log(newBox.valueOf())
+    newBox.valueOf()
+
+
+
+  </script>
+</body>
+</html>
